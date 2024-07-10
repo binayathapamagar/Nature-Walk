@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "coverImage2.jpeg",
+      "filename" : "coverImage3.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "coverImage2@2x.jpeg",
+      "filename" : "coverImage3@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "coverImage2@3x.jpeg",
+      "filename" : "coverImage3@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

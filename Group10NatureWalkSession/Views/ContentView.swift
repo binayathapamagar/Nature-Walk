@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // MARK: Properties
+    
+    // MARK: Body
+    
     var body: some View {
-        NavigationStack {
+        NavigationView {
             TabView {
                 
                 SessionListView()
@@ -39,6 +44,9 @@ struct ContentView: View {
             }//: TabView
             .tint(.black)
         }//: NavigationStack
+        .onAppear {
+            SessionDataHelper().getSessionsData()
+        }
     }//: Body
 }
 
