@@ -13,14 +13,13 @@ class FireAuthHelper: ObservableObject {
     // MARK: Properties
     
     //Firebase in-built user.
-    
     @Published var user: User? {
         didSet {
             objectWillChange.send()
         }
     }
     
-    //Static properties
+    // MARK: Static properties
     
     static let emailKey = "KEY_EMAIL"
     private static var shared: FireAuthHelper?
@@ -92,7 +91,7 @@ class FireAuthHelper: ObservableObject {
         
     }
     
-    func signOut(){
+    func logout(){
         do {
             try Auth.auth().signOut()
             print(#function, "Successfully signed the user out.")

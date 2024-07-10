@@ -6,12 +6,27 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 @main
 struct Group10NatureWalkSessionApp: App {
+    
+    // MARK: Initializers
+    
+    init() {
+        //Initialize firebase services
+        FirebaseApp.configure()
+    }
+    
+    // MARK: Body
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
+    
 }

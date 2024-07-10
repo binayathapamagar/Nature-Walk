@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension Bundle {
     
     ///Decodes the JSON file that is stored locally in the Bundle and returns the decoded data.
