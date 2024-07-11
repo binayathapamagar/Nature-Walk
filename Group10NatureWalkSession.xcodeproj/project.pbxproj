@@ -14,6 +14,8 @@
 		2A3AFB722C4059AE0036B036 /* FavouriteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB712C4059AE0036B036 /* FavouriteItemView.swift */; };
 		2A3AFB742C4077E30036B036 /* PurchaseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB732C4077E30036B036 /* PurchaseItemView.swift */; };
 		2A3AFB762C4080C40036B036 /* TicketPurchasingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB752C4080C40036B036 /* TicketPurchasingView.swift */; };
+		2A3AFB782C408F710036B036 /* PurchaseTicketDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB772C408F710036B036 /* PurchaseTicketDetailView.swift */; };
+		2A3AFB7A2C4098D90036B036 /* PurchaseMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB792C4098D90036B036 /* PurchaseMapAnnotation.swift */; };
 		2A93D61A2C36083600D92221 /* sessionsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A93D6192C36083600D92221 /* sessionsList.json */; };
 		2A93D61C2C360AFE00D92221 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93D61B2C360AFE00D92221 /* BundleExtension.swift */; };
 		2A95CC4B2C267AB30044617B /* Group10NatureWalkSessionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A95CC4A2C267AB30044617B /* Group10NatureWalkSessionApp.swift */; };
@@ -69,6 +71,8 @@
 		2A3AFB712C4059AE0036B036 /* FavouriteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteItemView.swift; sourceTree = "<group>"; };
 		2A3AFB732C4077E30036B036 /* PurchaseItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseItemView.swift; sourceTree = "<group>"; };
 		2A3AFB752C4080C40036B036 /* TicketPurchasingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketPurchasingView.swift; sourceTree = "<group>"; };
+		2A3AFB772C408F710036B036 /* PurchaseTicketDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTicketDetailView.swift; sourceTree = "<group>"; };
+		2A3AFB792C4098D90036B036 /* PurchaseMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseMapAnnotation.swift; sourceTree = "<group>"; };
 		2A93D6192C36083600D92221 /* sessionsList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sessionsList.json; sourceTree = "<group>"; };
 		2A93D61B2C360AFE00D92221 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		2A95CC472C267AB30044617B /* Group10NatureWalkSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Group10NatureWalkSession.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,7 +291,9 @@
 			children = (
 				2A3AFB732C4077E30036B036 /* PurchaseItemView.swift */,
 				2A95CC812C2684D20044617B /* PurchaseListView.swift */,
+				2A3AFB772C408F710036B036 /* PurchaseTicketDetailView.swift */,
 				2A3AFB752C4080C40036B036 /* TicketPurchasingView.swift */,
+				2A3AFB792C4098D90036B036 /* PurchaseMapAnnotation.swift */,
 			);
 			path = PurchaseList;
 			sourceTree = "<group>";
@@ -478,8 +484,10 @@
 				2A97FFA52C3F238300D96A41 /* PaymentInfo.swift in Sources */,
 				2A95CC842C2685620044617B /* SessionDetailView.swift in Sources */,
 				2AF381112C27DE9200800202 /* DetailRatingsView.swift in Sources */,
+				2A3AFB7A2C4098D90036B036 /* PurchaseMapAnnotation.swift in Sources */,
 				2AF381132C27DEC600800202 /* DetailGuideView.swift in Sources */,
 				2A95CC8B2C2685D40044617B /* UserObj.swift in Sources */,
+				2A3AFB782C408F710036B036 /* PurchaseTicketDetailView.swift in Sources */,
 				2A95CC772C267FF30044617B /* FireDBHelper.swift in Sources */,
 				2A95CC802C2684A30044617B /* FavouriteListView.swift in Sources */,
 				2A95CC7E2C2684850044617B /* ProfileView.swift in Sources */,

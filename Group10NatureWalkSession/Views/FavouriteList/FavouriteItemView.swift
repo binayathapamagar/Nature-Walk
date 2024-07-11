@@ -46,6 +46,19 @@ struct FavouriteItemView: View {
 
 #Preview {
     FavouriteItemView(
-        session: Session(id: 0, name: "Test", description: "Test", starRating: 3.5, guideName: "Test", photos: [], pricingPerPerson: 3.4, date: "2024-08-22T11:30:00")
+        session: Session(
+            id: 1,
+            name: "Test",
+            description: "Test",
+            starRating: 2.5,
+            guideName: "Test",
+            guidePhoneNum: "4357718231",
+            photos: [SessionCoverImage(id: 0, name: "coverImage1")],
+            pricingPerPerson: 1.1,
+            date: "2024-08-22T11:30:00",
+            latitude: 43.7688,
+            longitude: -79.4130
+            
+        )
     )
 }

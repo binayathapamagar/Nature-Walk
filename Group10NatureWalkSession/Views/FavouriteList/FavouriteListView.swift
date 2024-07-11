@@ -120,6 +120,7 @@ extension FavouriteListView {
             userObj.favorites.contains(session.id)
         }
     }
+    
 }
 
 #Preview {

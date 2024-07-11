@@ -191,25 +191,30 @@ struct ProfileView: View {
             return
         }
         
-        isLoading = true
-        
-        let expiryDateString = hasModifiedExpiryDate ? Date.dateFormatter.string(from: expiryDate) : expiryDateFromDB
-        
-        let paymentInfo = PaymentInfo(
-            cardNumber: cardNumber,
-            expiryDate: expiryDateString,
-            cvv: cvv
-        )
-        
-        fireDBHelper.updateUser(
-            with: UserObj(
-                name: name,
-                email: email,
-                contactNumber: contactNumber,
-                paymentInfo: paymentInfo
+        if let userObj = fireDBHelper.userObj {
+            isLoading = true
+            
+            let expiryDateString = hasModifiedExpiryDate ? Date.dateFormatter.string(from: expiryDate) : expiryDateFromDB
+            
+            let paymentInfo = PaymentInfo(
+                cardNumber: cardNumber,
+                expiryDate: expiryDateString,
+                cvv: cvv
             )
-        )
-        isLoading = false
+            
+            fireDBHelper.updateUser(
+                with: UserObj(
+                    name: name,
+                    email: email,
+                    contactNumber: contactNumber,
+                    favourites: userObj.favorites,
+                    purchasedTickets: userObj.purchasedTickets,
+                    paymentInfo: paymentInfo
+                )
+            )
+            isLoading = false
+        }
+        
     }
     
     private func handleUserObjChange(with newUserObj: UserObj?) {

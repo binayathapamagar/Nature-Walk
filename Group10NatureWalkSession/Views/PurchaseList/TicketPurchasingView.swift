@@ -69,9 +69,12 @@ extension TicketPurchasingView {
             description: "Test",
             starRating: 2.5,
             guideName: "Test",
+            guidePhoneNum: "4357718231",
             photos: [SessionCoverImage(id: 0, name: "coverImage1")],
             pricingPerPerson: 1.1,
-            date: "2024-08-22T11:30:00"
+            date: "2024-08-22T11:30:00",
+            latitude: 43.7688,
+            longitude: -79.4130
             
         ),
         ticketQuantity: .constant(1),

@@ -14,9 +14,12 @@ struct Session: Codable, Identifiable {
     let description: String
     let starRating: Double
     let guideName: String
+    let guidePhoneNum: String
     let photos: [SessionCoverImage]
     let pricingPerPerson: Double
     let date: String
+    let latitude: Double
+    let longitude: Double
     
 }
 

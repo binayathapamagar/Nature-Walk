@@ -36,7 +36,10 @@ struct SessionListView: View {
                             session: session,
                             rootView: $rootView,
                             selectedTabIndex: $selectedTabIndex
-                        ).environmentObject(FireAuthHelper.getInstance()).environmentObject(FireDBHelper.getInstance()).environmentObject(SessionDataHelper.getInstance())
+                        )
+                        .environmentObject(fireAuthHelper)
+                        .environmentObject(fireDBHelper)
+                        .environmentObject(sessionDataHelper)
                     ) {
                         SessionListItemView(session: session)
                     }

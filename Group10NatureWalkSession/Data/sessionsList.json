@@ -16,10 +16,11 @@
   "sessions": [
     {
       "id": 1,
-      "name": "Ossington Station",
+      "name": "Ossington Nature Walk",
       "description": "Explore the beauty of the Ossignton area on this guided nature walk. Discover local flora and fauna, learn about the history of the area, and enjoy a peaceful stroll through one of the city's hidden gems. Perfect for nature enthusiasts and those looking to escape the hustle and bustle of urban life.",
       "starRating": 4.5,
       "guideName": "Cackie Jhan",
+      "guidePhoneNum": "4371123421",
       "photos": [
         {
           "id": 1,
@@ -35,14 +36,17 @@
         }
       ],
       "pricingPerPerson": 18.99,
-      "date": "2024-07-14T08:30:00"
+      "date": "2024-07-14T08:30:00",
+      "latitude": 43.6624,
+      "longitude": -79.4264
     },
     {
       "id": 2,
       "name": "Yonge Hike",
-      "description": "Capture the essence of the Y ongecity on this hike. Join our experienced guide as you explore vibrant downtown areas, learn about composition and lighting, and get tips on capturing the perfect shot while hiking. Ideal for hikers of all levels.",
+      "description": "Capture the essence of the Yonge city on this hike. Join our experienced guide as you explore vibrant downtown areas, learn about composition and lighting, and get tips on capturing the perfect shot while hiking. Ideal for hikers of all levels.",
       "starRating": 4.7,
       "guideName": "Alex Parker",
+      "guidePhoneNum": "4371123123",
       "photos": [
         {
           "id": 1,
@@ -58,14 +62,17 @@
         }
       ],
       "pricingPerPerson": 25,
-      "date": "2024-08-22T09:30:00"
+      "date": "2024-08-22T09:30:00",
+      "latitude": 43.6706,
+      "longitude": -79.3865
     },
     {
       "id": 3,
-      "name": "Bathrust Walkers",
+      "name": "Bathurst Walkers",
       "description": "Embark on a thrilling hike with the Bathurst Walkers, guided by the seasoned outdoorsman Tris Cucker. This session takes you through the breathtaking Bathurst trails, where you'll traverse diverse terrains and immerse yourself in the stunning natural beauty of the region. As you hike, Tris will share fascinating insights about the local flora and fauna, the area's history, and tips for making the most of your outdoor adventures. Perfect for hikers of all levels, this experience blends the joy of exploration with a deep appreciation for nature. Whether you're a novice or a seasoned trekker, join us to discover the hidden gems of Bathurst and create lasting memories on this exhilarating journey!",
       "starRating": 4.9,
       "guideName": "Tris Cucker",
+      "guidePhoneNum": "4371123001",
       "photos": [
         {
           "id": 1,
@@ -77,14 +84,17 @@
         }
       ],
       "pricingPerPerson": 45,
-      "date": "2024-08-22T06:30:00"
+      "date": "2024-08-22T06:30:00",
+      "latitude": 43.6660,
+      "longitude": -79.4112
     },
     {
       "id": 4,
-      "name": "Forrest Hill",
+      "name": "Sunset Hike in Forrest Hill",
       "description": "Experience the magic of twilight on our Sunset Hike in Forrest Hill, expertly guided by Rarget Mobbie. As the day transitions into night, you'll embark on a serene journey through the enchanting Forrest Hill trails. This hike offers the perfect opportunity to unwind and connect with nature, with breathtaking views of the setting sun casting a golden glow over the landscape. Rarget, with a wealth of knowledge and passion for the outdoors, will lead you through the gently winding paths, sharing stories about the area's rich natural heritage and tips for enjoying the tranquility of twilight hiking. Ideal for all levels, this session provides a peaceful escape from the daily hustle, making it a perfect evening activity for both novice hikers and seasoned adventurers. Join us to witness the serene beauty of Forrest Hill at sunset and create unforgettable memories under the twilight sky.",
       "starRating": 4.8,
       "guideName": "Rarget Mobbie",
+      "guidePhoneNum": "4371123012",
       "photos": [
         {
           "id": 1,
@@ -96,7 +106,9 @@
         }
       ],
       "pricingPerPerson": 30.25,
-      "date": "2024-11-02T07:30:00"
+      "date": "2024-11-02T07:30:00",
+      "latitude": 43.7050,
+      "longitude": -79.3990
     },
     {
       "id": 5,
@@ -104,6 +116,7 @@
       "description": "Dive into the wonders of nature with the North York Naturalist session, guided by the knowledgeable Jim Kisoo. This session is perfect for those looking to explore the diverse ecosystems and rich biodiversity of North York. As you traverse the scenic trails, Jim will share his deep understanding and passion for the local wildlife and plants, offering insights into the unique species that inhabit the area. Learn to identify different flora and fauna, and discover the intricate relationships within this vibrant ecosystem. Whether you're a budding naturalist or an avid nature enthusiast, this journey provides a comprehensive and engaging exploration of North York's natural beauty. Enjoy a day filled with learning, discovery, and a renewed appreciation for the wonders of the natural world. Join us and immerse yourself in the tranquil and educational experience that awaits on the North York Naturalist adventure!",
       "starRating": 4.6,
       "guideName": "Jim Kisoo",
+      "guidePhoneNum": "4371123999",
       "photos": [
         {
           "id": 1,
@@ -115,7 +128,9 @@
         }
       ],
       "pricingPerPerson": 20.99,
-      "date": "2024-12-20T10:30:00"
+      "date": "2024-12-20T10:30:00",
+      "latitude": 43.7688,
+      "longitude": -79.4130
     }
   ]
 }

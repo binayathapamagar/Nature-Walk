@@ -29,10 +29,12 @@ struct UserObj: Identifiable, Hashable, Codable {
         self.contactNumber = contactNumber
     }
     
-    init(name: String, email: String, contactNumber: String, paymentInfo: PaymentInfo) {
+    init(name: String, email: String, contactNumber: String, favourites: [Int], purchasedTickets: [Ticket], paymentInfo: PaymentInfo) {
         self.name = name
         self.email = email
         self.contactNumber = contactNumber
+        self.favorites = favourites
+        self.purchasedTickets = purchasedTickets
         self.paymentInfo = paymentInfo
     }
     
