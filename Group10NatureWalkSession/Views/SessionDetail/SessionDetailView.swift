@@ -24,8 +24,8 @@ struct SessionDetailView: View {
     
     @State private var showLoginActionSheet = false
     @State private var isSessionInFavorites = false
-    @State private var isLoading = false // For activity indicator
-        
+    @State private var isLoading = false
+    
     // MARK: Body
     
     var body: some View {
@@ -71,7 +71,7 @@ struct SessionDetailView: View {
                     
                     // Share Button
                     Button(action: {
-                        // Add your share functionality here
+                        shareSession()
                     }) {
                         HStack {
                             Image(systemName: "square.and.arrow.up")
@@ -159,6 +159,11 @@ extension SessionDetailView {
             return false
         }
         return userObj.favorites.contains(where: { $0 == session.id })
+    }
+    
+    private func shareSession() {
+        let activityViewController = UIActivityViewController(activityItems: ["\(session.name) - Price: $\(session.pricingPerPerson)"], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
     }
     
 }

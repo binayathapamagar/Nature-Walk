@@ -63,18 +63,21 @@ struct ContentView: View {
                 .tag(1)
                 
                 // Purchases List View
-                PurchaseListView()
-                    .tabItem {
-                        Image(systemName: "dollarsign.circle.fill")
-                        Text("Purchases")
-                    }
-                    .environmentObject(fireAuthHelper)
-                    .environmentObject(firedDBHelper)
-                    .environmentObject(sessionDataHelper)
-                    .onAppear {
-                        checkUserLogin()
-                    }
-                    .tag(2)
+                PurchaseListView(
+                    rootView: $rootView,
+                    selectedTabIndex: $selectedTabIndex
+                )
+                .tabItem {
+                    Image(systemName: "dollarsign.circle.fill")
+                    Text("Purchases")
+                }
+                .environmentObject(fireAuthHelper)
+                .environmentObject(firedDBHelper)
+                .environmentObject(sessionDataHelper)
+                .onAppear {
+                    checkUserLogin()
+                }
+                .tag(2)
                 
                 // Profile View
                 switch rootView {

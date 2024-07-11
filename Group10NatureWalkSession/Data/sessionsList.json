@@ -16,7 +16,7 @@
   "sessions": [
     {
       "id": 1,
-      "name": "Ossignton Nature Walk",
+      "name": "Ossington Station",
       "description": "Explore the beauty of the Ossignton area on this guided nature walk. Discover local flora and fauna, learn about the history of the area, and enjoy a peaceful stroll through one of the city's hidden gems. Perfect for nature enthusiasts and those looking to escape the hustle and bustle of urban life.",
       "starRating": 4.5,
       "guideName": "Cackie Jhan",
@@ -78,7 +78,7 @@
     },
     {
       "id": 4,
-      "name": "Sunset Hike in Forrest Hill",
+      "name": "Forrest Hill",
       "description": "Experience the magic of twilight on our Sunset Hike in Forrest Hill, expertly guided by Rarget Mobbie. As the day transitions into night, you'll embark on a serene journey through the enchanting Forrest Hill trails. This hike offers the perfect opportunity to unwind and connect with nature, with breathtaking views of the setting sun casting a golden glow over the landscape. Rarget, with a wealth of knowledge and passion for the outdoors, will lead you through the gently winding paths, sharing stories about the area's rich natural heritage and tips for enjoying the tranquility of twilight hiking. Ideal for all levels, this session provides a peaceful escape from the daily hustle, making it a perfect evening activity for both novice hikers and seasoned adventurers. Join us to witness the serene beauty of Forrest Hill at sunset and create unforgettable memories under the twilight sky.",
       "starRating": 4.8,
       "guideName": "Rarget Mobbie",

@@ -11,6 +11,9 @@ struct PurchaseListView: View {
     
     // MARK: Properties
         
+    @Binding var rootView: RootViewState
+    @Binding var selectedTabIndex: Int
+    
     @EnvironmentObject var fireAuthHelper: FireAuthHelper
     @EnvironmentObject var fireDBHelper: FireDBHelper
     @EnvironmentObject var sessionDataHelper: SessionDataHelper
@@ -48,8 +51,11 @@ extension PurchaseListView {
 }
 
 #Preview {
-    PurchaseListView()
-        .environmentObject(FireAuthHelper.getInstance())
-        .environmentObject(FireDBHelper.getInstance())
-        .environmentObject(SessionDataHelper.getInstance())
+    PurchaseListView(
+        rootView: .constant(.Profile),
+        selectedTabIndex: .constant(0)
+    )
+    .environmentObject(FireAuthHelper.getInstance())
+    .environmentObject(FireDBHelper.getInstance())
+    .environmentObject(SessionDataHelper.getInstance())
 }

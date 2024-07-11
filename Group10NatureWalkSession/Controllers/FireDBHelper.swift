@@ -45,12 +45,6 @@ class FireDBHelper : ObservableObject {
             objectWillChange.send()
         }
     }
-//    
-//    @Published var userFavSessionIds = [Int]() {
-//        didSet {
-//            objectWillChange.send()
-//        }
-//    }
     
     // MARK: Initializers
     
@@ -73,7 +67,6 @@ class FireDBHelper : ObservableObject {
         listener?.remove()
         listener = nil
         userList.removeAll()
-//        userFavSessionIds.removeAll()
     }
     
     private func getUserEmail() -> String? {
