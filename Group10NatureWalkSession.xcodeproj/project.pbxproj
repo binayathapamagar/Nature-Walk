@@ -10,6 +10,7 @@
 		2A1D0A902C3F1A1400D3DB24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A1D0A8F2C3F1A1400D3DB24 /* GoogleService-Info.plist */; };
 		2A3AFB692C402F640036B036 /* AuthHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB682C402F640036B036 /* AuthHeadingView.swift */; };
 		2A3AFB6C2C4030B70036B036 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */; };
+		2A3AFB6E2C4040C70036B036 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB6D2C4040C70036B036 /* DateExtension.swift */; };
 		2A93D61A2C36083600D92221 /* sessionsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A93D6192C36083600D92221 /* sessionsList.json */; };
 		2A93D61C2C360AFE00D92221 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93D61B2C360AFE00D92221 /* BundleExtension.swift */; };
 		2A95CC4B2C267AB30044617B /* Group10NatureWalkSessionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A95CC4A2C267AB30044617B /* Group10NatureWalkSessionApp.swift */; };
@@ -61,6 +62,7 @@
 		2A1D0A8F2C3F1A1400D3DB24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A3AFB682C402F640036B036 /* AuthHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeadingView.swift; sourceTree = "<group>"; };
 		2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
+		2A3AFB6D2C4040C70036B036 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		2A93D6192C36083600D92221 /* sessionsList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sessionsList.json; sourceTree = "<group>"; };
 		2A93D61B2C360AFE00D92221 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		2A95CC472C267AB30044617B /* Group10NatureWalkSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Group10NatureWalkSession.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +344,7 @@
 				2AF381052C27D7F700800202 /* UIScreenExtension.swift */,
 				2AF381062C27D7F700800202 /* UIWindowExtension.swift */,
 				2A93D61B2C360AFE00D92221 /* BundleExtension.swift */,
+				2A3AFB6D2C4040C70036B036 /* DateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				2A97FF9D2C3F1E0400D96A41 /* RegisterView.swift in Sources */,
 				2A95CC892C2685C90044617B /* VenueMapView.swift in Sources */,
 				2AF381032C27D77000800202 /* SessionListCoverImage.swift in Sources */,
+				2A3AFB6E2C4040C70036B036 /* DateExtension.swift in Sources */,
 				2A3AFB692C402F640036B036 /* AuthHeadingView.swift in Sources */,
 				2A93D61C2C360AFE00D92221 /* BundleExtension.swift in Sources */,
 				2AF381082C27D7F700800202 /* UIWindowExtension.swift in Sources */,

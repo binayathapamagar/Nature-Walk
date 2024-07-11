@@ -22,6 +22,10 @@ class FireDBHelper : ObservableObject {
     private let FIELD_PURCHASED_TICKETS = "purchasedTickets"
     private let FIELD_PAYMENT_INFO = "paymentInfo"
     
+    private let FIELD_CARD_NUMBER = "cardNumber"
+    private let FIELD_CVV = "cvv"
+    private let FIELD_EXPIRY_DATE = "expiryDate"
+    
     // MARK: Properties
     
     private static var shared: FireDBHelper?
@@ -100,22 +104,33 @@ class FireDBHelper : ObservableObject {
     
     func updateUser(with userObj: UserObj) {
         if let userEmail = getUserEmail(), !userEmail.isEmpty {
+            var userData: [String: Any] = [
+                FIELD_USER_NAME: userObj.name,
+                FIELD_EMAIL: userObj.email,
+                FIELD_CONTACT_NO: userObj.contactNumber,
+            ]
+            
+            if let paymentInfo = userObj.paymentInfo {
+                
+                // Convert PaymentInfo to a dictionary
+                let paymentInfoDict: [String: Any] = [
+                    FIELD_CARD_NUMBER: paymentInfo.cardNumber,
+                    FIELD_CVV: paymentInfo.cvv,
+                    FIELD_EXPIRY_DATE: paymentInfo.expiryDate,
+                ]
+                userData[FIELD_PAYMENT_INFO] = paymentInfoDict
+            }
+            
             self.db
                 .collection(COLLECTION_NAME)
                 .document(userEmail)
-                .updateData([
-                    FIELD_USER_NAME: userObj.name,
-                    FIELD_EMAIL: userObj.email,
-                    FIELD_CONTACT_NO: userObj.contactNumber
-                ]) { error in
-                    
+                .updateData(userData) { error in
                     if let error {
                         print(#function, "Failed to update document: \(userEmail) | \(userObj.name) | \(error)")
                     } else {
                         print(#function, "Successfully updated document: \(userEmail) | \(userObj.name)")
                         self.getUserFromDB()
                     }
-                    
                 }
         } else {
             print(#function, "No logged in user")

@@ -5,20 +5,6 @@
 //  Created by BINAYA THAPA MAGAR on 2024-06-22.
 //
 
-//
-//  UserView.swift
-//  Group10NatureWalkSession
-//
-//  Created by BINAYA THAPA MAGAR on 2024-06-22.
-//
-
-//
-//  UserView.swift
-//  Group10NatureWalkSession
-//
-//  Created by BINAYA THAPA MAGAR on 2024-06-22.
-//
-
 import SwiftUI
 
 struct ProfileView: View {
@@ -40,7 +26,9 @@ struct ProfileView: View {
     
     @State private var cardNumber = ""
     @State private var cvv = ""
-    @State private var expiryDate = ""
+    @State private var expiryDate = Date()
+    @State private var expiryDateFromDB = ""
+    @State private var hasModifiedExpiryDate = false
     
     // MARK: Body
     
@@ -77,10 +65,30 @@ struct ProfileView: View {
                                 .padding(.vertical, 8)
                                 .disabled(!isEditing)
                                 .keyboardType(.numberPad)
-                            TextField("Expiry Date", text: $expiryDate)
+                            
+                            if isEditing {
+                                DatePicker("Expiry Date", selection: Binding(
+                                    get: { expiryDate },
+                                    set: {
+                                        expiryDate = $0
+                                        hasModifiedExpiryDate = true
+                                    }
+                                ), displayedComponents: .date)
                                 .padding(.vertical, 8)
-                                .disabled(!isEditing)
-                                .keyboardType(.numbersAndPunctuation)
+                            } else {
+                                TextField("Expiry Date", text: Binding(
+                                    get: {
+                                        setupDateForTextField()
+                                    },
+                                    set: { _ in }
+                                ))
+                                .disabled(expiryDateFromDB.isEmpty)
+                                .foregroundStyle(
+                                    expiryDateFromDB.isEmpty ? .gray : .black
+                                )
+                                .padding(.vertical, 8)
+                                .disabled(true)
+                            }
                         }
                         
                     }//: FORM
@@ -110,8 +118,7 @@ struct ProfileView: View {
                         }
                         
                         Button(action: {
-                            fireAuthHelper.logout()
-                            rootView = .Login
+                            logoutButtonTapped()
                         }) {
                             Text("Logout")
                                 .frame(maxWidth: .infinity)
@@ -145,6 +152,12 @@ struct ProfileView: View {
         }
     }
     
+}
+
+// MARK: ProfileView Extension
+
+extension ProfileView {
+    
     // MARK: Methods
     
     private func setup() {
@@ -156,12 +169,21 @@ struct ProfileView: View {
     
     private func updateUser() {
         isLoading = true
+        
+        let expiryDateString = hasModifiedExpiryDate ? Date.dateFormatter.string(from: expiryDate) : expiryDateFromDB
+        
+        let paymentInfo = PaymentInfo(
+            cardNumber: cardNumber,
+            expiryDate: expiryDateString,
+            cvv: cvv
+        )
+        
         fireDBHelper.updateUser(
             with: UserObj(
                 name: name,
                 email: email,
-                contactNumber: contactNumber
-                // Add other fields as needed
+                contactNumber: contactNumber,
+                paymentInfo: paymentInfo
             )
         )
         isLoading = false
@@ -192,8 +214,23 @@ struct ProfileView: View {
         if let paymentInfo = userObj.paymentInfo {
             cardNumber = paymentInfo.cardNumber
             cvv = paymentInfo.cvv
-            expiryDate = paymentInfo.expiryDate
+            expiryDateFromDB = paymentInfo.expiryDate
+            if !paymentInfo.expiryDate.isEmpty,
+               let date = Date.dateFormatter.date(from: paymentInfo.expiryDate) {
+                expiryDate = date
+                hasModifiedExpiryDate = false
+            }
         }
+    }
+    
+    private func setupDateForTextField() -> String {
+        let expDate = Date.dateFormatter.string(from: expiryDate)
+        return expiryDateFromDB.isEmpty ? "For example: " + expDate : expDate
+    }
+    
+    private func logoutButtonTapped() {
+        fireAuthHelper.logout()
+        rootView = .Login
     }
     
 }
