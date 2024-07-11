@@ -187,6 +187,12 @@ extension FireDBHelper {
     }
     
     func deleteSessionFromFav(with id: Int) {
+        guard var userObj else {
+            print(#function, "User objc is nil!")
+            return
+        }
+        userObj.favorites.removeAll(where: { $0 == id })
+        updateUser(with: userObj)
     }
     
 }

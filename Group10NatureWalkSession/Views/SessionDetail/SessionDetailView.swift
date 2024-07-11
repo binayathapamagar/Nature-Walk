@@ -23,6 +23,8 @@ struct SessionDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var showLoginActionSheet = false
+    @State private var isSessionInFavorites = false
+    @State private var isLoading = false // For activity indicator
         
     // MARK: Body
     
@@ -49,29 +51,27 @@ struct SessionDetailView: View {
                         favButtonTapped()
                     }) {
                         HStack {
-                            Image(
-                                systemName: "heart"
-                            )
-                            .foregroundColor(
-                                .gray
-                            )
-                            Text("Favorite")
-                                .font(.subheadline)
-                                .foregroundColor(
-                                    .gray
-                                )
+                            if isLoading {
+                                ProgressView()
+                                    .progressViewStyle(
+                                        CircularProgressViewStyle(tint: .gray)
+                                    )
+                            } else {
+                                Image(systemName: isSessionInFavorites ? "heart.fill" : "heart")
+                                    .foregroundColor(isSessionInFavorites ? .red : .gray)
+                                Text("Favorite")
+                                    .font(.subheadline)
+                                    .foregroundColor(isSessionInFavorites ? .red : .gray)
+                            }
                         }
                         .padding(8)
-                        .background(
-                            Color(
-                                UIColor.systemGray6
-                            )
-                        )
+                        .background(Color(UIColor.systemGray6))
                         .cornerRadius(8)
                     }
                     
                     // Share Button
                     Button(action: {
+                        // Add your share functionality here
                     }) {
                         HStack {
                             Image(systemName: "square.and.arrow.up")
@@ -90,6 +90,12 @@ struct SessionDetailView: View {
             }
             .navigationTitle("Learn about the \(session.name)")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                setup()
+            }
+            .onChange(of: fireDBHelper.userObj) { oldUserObj, newUserObj in
+                updateFavButton(with: newUserObj)
+            }
             .actionSheet(isPresented: $showLoginActionSheet) {
                 ActionSheet(
                     title: Text("Login Required"),
@@ -113,9 +119,20 @@ extension SessionDetailView {
     
     // MARK: Methods
     
-    private func favButtonTapped() {
+    private func setup() {
         if Auth.auth().currentUser != nil {
-            fireDBHelper.addSessionIdToFavs(with: session.id)
+            updateFavButton(with: fireDBHelper.userObj!)
+        } else {
+            print(#function, "User is not logged in")
+        }
+    }
+    
+    private func favButtonTapped() {
+        isLoading = true
+        if Auth.auth().currentUser != nil {
+            sessionInUserFavs()
+            ? fireDBHelper.deleteSessionFromFav(with: session.id)
+            : fireDBHelper.addSessionIdToFavs(with: session.id)
         } else {
             showLoginActionSheet = true
         }
@@ -125,6 +142,28 @@ extension SessionDetailView {
         rootView = .Login
         selectedTabIndex = 3
         dismiss()
+    }
+    
+    private func updateFavButton(with newUserObj: UserObj?) {
+        isLoading = false
+        guard let newUserObj = newUserObj else {
+            print(#function, "New user obj is nil")
+            return
+        }
+        
+        if sessionInUserFavs() {
+            isSessionInFavorites = true
+        } else {
+            isSessionInFavorites = false
+        }
+    }
+    
+    private func sessionInUserFavs() -> Bool {
+        guard let userObj = fireDBHelper.userObj else {
+            print(#function, "User obj is nil.")
+            return false
+        }
+        return userObj.favorites.contains(where: { $0 == session.id })
     }
     
 }
