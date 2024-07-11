@@ -27,6 +27,7 @@ struct SessionDetailView: View {
     @State private var isLoading = false
     @State private var showTicketPurchaseModal = false
     @State private var ticketQuantity = 1
+    @State private var sessionAlrPurchsed = false
     
     // MARK: Body
     
@@ -64,11 +65,17 @@ struct SessionDetailView: View {
                                         CircularProgressViewStyle(tint: .gray)
                                     )
                             } else {
-                                Image(systemName: isSessionInFavorites ? "heart.fill" : "heart")
-                                    .foregroundColor(isSessionInFavorites ? .red : .gray)
+                                Image(
+                                    systemName: isSessionInFavorites ? "heart.fill" : "heart"
+                                )
+                                .foregroundColor(
+                                    isSessionInFavorites ? .red : .gray
+                                )
                                 Text("Favorite")
                                     .font(.subheadline)
-                                    .foregroundColor(isSessionInFavorites ? .red : .gray)
+                                    .foregroundColor(
+                                        isSessionInFavorites ? .red : .gray
+                                    )
                             }
                         }
                         .padding(8)
@@ -97,11 +104,17 @@ struct SessionDetailView: View {
                         purchaseButtonTapped()
                     }) {
                         HStack {
-                            Image(systemName: "cart.fill")
-                                .foregroundColor(.green)
+                            Image(
+                                systemName: sessionAlrPurchsed ? "cart.fill" : "cart"
+                            )
+                            .foregroundColor(
+                                sessionAlrPurchsed ? .green : .gray
+                            )
                             Text("Purchase")
                                 .font(.subheadline)
-                                .foregroundColor(.green)
+                                .foregroundColor(
+                                    sessionAlrPurchsed ? .green : .gray
+                                )
                         }
                         .padding(8)
                         .background(Color(UIColor.systemGray6))
@@ -127,7 +140,7 @@ struct SessionDetailView: View {
                 setup()
             }
             .onChange(of: fireDBHelper.userObj) { oldUserObj, newUserObj in
-                updateFavButton(with: newUserObj)
+                updateButtons()
             }
             .actionSheet(isPresented: $showLoginActionSheet) {
                 ActionSheet(
@@ -144,12 +157,16 @@ struct SessionDetailView: View {
         }
         .scrollIndicators(.hidden)
     }
-    
-    // MARK: Methods
-    
+
+}
+
+// MARK: General Methods extension
+
+extension SessionDetailView {
+        
     private func setup() {
         if Auth.auth().currentUser != nil {
-            updateFavButton(with: fireDBHelper.userObj!)
+            updateFavButton()
             updatePurchaseButton()
         } else {
             print(#function, "User is not logged in")
@@ -162,6 +179,22 @@ struct SessionDetailView: View {
         dismiss()
     }
     
+    private func updateButtons() {
+        updateFavButton()
+        updatePurchaseButton()
+    }
+    
+    private func shareSession() {
+        let activityViewController = UIActivityViewController(activityItems: ["\(session.name) - Price: $\(session.pricingPerPerson)"], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: Fav Button methods
+
+extension SessionDetailView {
+    
     private func favButtonTapped() {
         isLoading = true
         if Auth.auth().currentUser != nil {
@@ -173,7 +206,7 @@ struct SessionDetailView: View {
         }
     }
     
-    private func updateFavButton(with newUserObj: UserObj?) {
+    private func updateFavButton() {
         isLoading = false
         if sessionInUserFavs() {
             isSessionInFavorites = true
@@ -190,8 +223,17 @@ struct SessionDetailView: View {
         return userObj.favorites.contains(where: { $0 == session.id })
     }
     
+}
+
+// MARK: Purchase Button Methods
+
+extension SessionDetailView {
+    
     private func purchaseButtonTapped() {
         if Auth.auth().currentUser != nil {
+            if sessionAlrPurchsed {
+                return
+            }
             showTicketPurchaseModal = true
         } else {
             showLoginActionSheet = true
@@ -199,13 +241,21 @@ struct SessionDetailView: View {
     }
     
     private func updatePurchaseButton() {
-        // You can add logic here to update purchase button if needed
+        if sessionAlrPurchased() {
+            sessionAlrPurchsed = true
+        } else {
+            sessionAlrPurchsed = false
+        }
     }
     
-    private func shareSession() {
-        let activityViewController = UIActivityViewController(activityItems: ["\(session.name) - Price: $\(session.pricingPerPerson)"], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+    private func sessionAlrPurchased() -> Bool {
+        guard let userObj = fireDBHelper.userObj else {
+            print(#function, "User obj is nil.")
+            return false
+        }
+        return userObj.purchasedTickets.contains(where: { $0.sessionID == session.id })
     }
+    
 }
 
 #Preview {
