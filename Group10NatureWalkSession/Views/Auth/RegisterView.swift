@@ -127,7 +127,7 @@ extension RegisterView {
             email: fireAuthHelper.user?.email ?? email,
             contactNumber: contactNumber
         )
-        fireDBHelper.insertUser(newUser: newUserObjForDB)
+        fireDBHelper.addUser(newUser: newUserObjForDB)
     }
     
     private func userRegistered() {

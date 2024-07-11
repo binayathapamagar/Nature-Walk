@@ -44,6 +44,12 @@ class FireDBHelper : ObservableObject {
         }
     }
     
+    @Published var userFavSessions = [Session]() {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
     // MARK: Initializers
     
     init(db: Firestore) {
@@ -58,10 +64,27 @@ class FireDBHelper : ObservableObject {
         }
         return shared!
     }
+        
+    // MARK: Other methods
     
-    // MARK: User DB Methods
+    func removeCollectionListener() {
+        listener?.remove()
+        listener = nil
+//        parkingList.removeAll()
+        userList.removeAll()
+    }
     
-    func insertUser(newUser: UserObj) {
+    private func getUserEmail() -> String? {
+        UserDefaults.standard.string(forKey: FireAuthHelper.emailKey)
+    }
+    
+}
+
+// MARK: User DB Methods extension
+
+extension FireDBHelper {
+        
+    func addUser(newUser: UserObj) {
         if let userEmail = getUserEmail(), !userEmail.isEmpty {
             do {
                 try self.db
@@ -77,7 +100,7 @@ class FireDBHelper : ObservableObject {
         }
     }
     
-    func getUserFromDB() {
+    func fetchUserFromDB() {
         if let userEmail = getUserEmail(), !userEmail.isEmpty {
             self.db.collection(COLLECTION_NAME).document(userEmail).getDocument { (document, error) in
                 if let document = document, document.exists {
@@ -129,7 +152,7 @@ class FireDBHelper : ObservableObject {
                         print(#function, "Failed to update document: \(userEmail) | \(userObj.name) | \(error)")
                     } else {
                         print(#function, "Successfully updated document: \(userEmail) | \(userObj.name)")
-                        self.getUserFromDB()
+                        self.fetchUserFromDB()
                     }
                 }
         } else {
@@ -137,17 +160,32 @@ class FireDBHelper : ObservableObject {
         }
     }
     
-    // MARK: Other methods
+}
+
+// MARK: Favourite sessions extension
+
+extension FireDBHelper {
     
-    func removeCollectionListener() {
-        listener?.remove()
-        listener = nil
-//        parkingList.removeAll()
-        userList.removeAll()
+    func fetchUserFavSessions() {
+        guard let userObj = userObj else {
+            print(#function, "User object is nil!")
+            return
+        }
+        
     }
     
-    private func getUserEmail() -> String? {
-        UserDefaults.standard.string(forKey: FireAuthHelper.emailKey)
+    func addSessionToFavs() {
+        
     }
+    
+    func deleteSessionFromFav() {
+        
+    }
+    
+}
+
+// MARK: Purchases extension
+
+extension FireDBHelper {
     
 }

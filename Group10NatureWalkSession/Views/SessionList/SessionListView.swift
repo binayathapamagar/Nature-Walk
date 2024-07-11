@@ -10,22 +10,24 @@ import SwiftUI
 struct SessionListView: View {
     
     // MARK: Properties
-    
-    @StateObject private var sessionApiHelper = SessionDataHelper()
-    
+        
+    @EnvironmentObject var fireAuthHelper: FireAuthHelper
+    @EnvironmentObject var fireDBHelper: FireDBHelper
+    @EnvironmentObject var sessionDataHelper: SessionDataHelper
+        
     // MARK: Body
     
     var body: some View {
         NavigationView {
             List {
-                SessionListCoverImage(coverImages: sessionApiHelper.homeCoverImages)
+                SessionListCoverImage(coverImages: sessionDataHelper.homeCoverImages)
                     .listRowSeparator(.hidden)
 
                 Text("Sessions Near You")
                     .font(.title2)
                     .fontWeight(.heavy)
 
-                ForEach(sessionApiHelper.sessionList) { session in
+                ForEach(sessionDataHelper.sessionList) { session in
                     NavigationLink(
                         destination: SessionDetailView(session: session)
                     ) {
@@ -41,8 +43,8 @@ struct SessionListView: View {
             .scrollIndicators(.hidden)
             .onAppear {
                 print(#function, "LOG: SessionListView OnAppear")
-                if sessionApiHelper.sessionList.isEmpty || sessionApiHelper.homeCoverImages.isEmpty {
-                    sessionApiHelper.getSessionsData()
+                if sessionDataHelper.sessionList.isEmpty || sessionDataHelper.homeCoverImages.isEmpty {
+                    sessionDataHelper.getSessionsData()
                 }
             }
             .navigationTitle("Toronto Nature Walk")
@@ -55,4 +57,7 @@ struct SessionListView: View {
 
 #Preview {
     SessionListView()
+        .environmentObject(FireAuthHelper.getInstance())
+        .environmentObject(FireDBHelper.getInstance())
+        .environmentObject(SessionDataHelper.getInstance())
 }

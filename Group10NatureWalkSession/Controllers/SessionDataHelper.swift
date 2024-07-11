@@ -9,11 +9,24 @@ import Foundation
 
 class SessionDataHelper: ObservableObject {
     
+    // MARK: Static methods
+    
+    private static var shared: SessionDataHelper?
+    
     // MARK: Properties
     
     @Published var homeCoverImages: [CoverImage] = []
     @Published var sessionList: [Session] = []
     @Published var errorMessage: String = ""
+        
+    // MARK: Static methods
+    
+    static func getInstance() -> SessionDataHelper {
+        if shared == nil {
+            shared = SessionDataHelper()
+        }
+        return shared!
+    }
     
     // MARK: Methods
     

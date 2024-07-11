@@ -12,9 +12,12 @@ struct ContentView: View {
     
     // MARK: Properties
     
-    var firedDBHelper: FireDBHelper = FireDBHelper.getInstance()
-    var fireAuthHelper: FireAuthHelper = FireAuthHelper.getInstance()
+    private var firedDBHelper: FireDBHelper = FireDBHelper.getInstance()
+    private var fireAuthHelper: FireAuthHelper = FireAuthHelper.getInstance()
+    private var sessionDataHelper = SessionDataHelper.getInstance()
+
     @StateObject var locationHelper = LocationHelper.getInstance()
+    
     @State private var isLoggedIn: Bool = false
     @State private var rootView: RootViewState = .Login
     @State private var selectedTabIndex: Int = 0
@@ -36,6 +39,7 @@ struct ContentView: View {
                     }
                     .environmentObject(fireAuthHelper)
                     .environmentObject(firedDBHelper)
+                    .environmentObject(sessionDataHelper)
                     .tag(0)
                 
                 // Favorites List View
@@ -46,6 +50,7 @@ struct ContentView: View {
                     }
                     .environmentObject(fireAuthHelper)
                     .environmentObject(firedDBHelper)
+                    .environmentObject(sessionDataHelper)
                     .onAppear {
                         checkUserLogin()
                     }
@@ -59,6 +64,7 @@ struct ContentView: View {
                     }
                     .environmentObject(fireAuthHelper)
                     .environmentObject(firedDBHelper)
+                    .environmentObject(sessionDataHelper)
                     .onAppear {
                         checkUserLogin()
                     }

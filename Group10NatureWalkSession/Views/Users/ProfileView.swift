@@ -163,7 +163,7 @@ extension ProfileView {
     private func setup() {
         if fireDBHelper.userObj == nil {
             loading = true
-            fireDBHelper.getUserFromDB()
+            fireDBHelper.fetchUserFromDB()
         }
     }
     

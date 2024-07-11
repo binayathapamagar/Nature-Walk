@@ -150,7 +150,7 @@ extension LoginView {
         if newFireUserObj != nil {
             updateRememberMe()
             fireDBHelper.removeCollectionListener()
-            fireDBHelper.getUserFromDB()
+            fireDBHelper.fetchUserFromDB()
             //navigate to home screen
             rootView = .Profile
         }
