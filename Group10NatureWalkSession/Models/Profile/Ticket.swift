@@ -9,8 +9,8 @@ import Foundation
 
 struct Ticket: Identifiable, Hashable, Codable {
     var id: String
-    var sessionID: String
+    var sessionID: Int
     var sessionName: String
-    var date: Date
+    var date: String
     var numberOfTickets: Int
 }

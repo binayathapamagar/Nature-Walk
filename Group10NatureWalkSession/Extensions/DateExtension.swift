@@ -15,4 +15,19 @@ extension Date {
         return formatter
     }
     
+    static func convertDateString(_ dateString: String) -> String {        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        if let date = dateFormatter.date(from: dateString) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "dd/MM/yyyy hh:mm a"
+            let formattedDate = outputFormatter.string(from: date)
+            return formattedDate
+        } else {
+            return "Coming soon!"
+        }
+    }
+    
 }

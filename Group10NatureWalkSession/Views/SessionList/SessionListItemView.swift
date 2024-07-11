@@ -42,6 +42,12 @@ struct SessionListItemView: View {
                     .lineLimit(2)
                     .padding(.trailing, 8)
                 
+                Text(Date.convertDateString(session.date))
+                    .font(.footnote)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                    .padding(.trailing, 8)
+                
             }//: VSTACK
             
             Spacer()
@@ -61,6 +67,6 @@ struct SessionListItemView: View {
             photos: [
                 SessionCoverImage(id: 1, name: "sessionOneA")
             ],
-            pricingPerPerson: 9.99)
+            pricingPerPerson: 9.99, date: "2024-08-22T11:30:00")
     )
 }

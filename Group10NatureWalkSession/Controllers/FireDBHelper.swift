@@ -28,6 +28,12 @@ class FireDBHelper : ObservableObject {
     private let FIELD_CVV = "cvv"
     private let FIELD_EXPIRY_DATE = "expiryDate"
     
+    private let FIELD_TICKET_ID = "id"
+    private let FIELD_SESSION_ID = "sessionID"
+    private let FIELD_SESSION_NAME = "sessionName"
+    private let FIELD_TICKET_DATE = "date"
+    private let FIELD_TICKET_QUANTITY = "numberOfTickets"
+    
     // MARK: Properties
     
     private static var shared: FireDBHelper?
@@ -126,7 +132,16 @@ extension FireDBHelper {
                 FIELD_USER_NAME: userObj.name,
                 FIELD_EMAIL: userObj.email,
                 FIELD_CONTACT_NO: userObj.contactNumber,
-                FIELD_FAVORITES: userObj.favorites
+                FIELD_FAVORITES: userObj.favorites,
+                FIELD_PURCHASED_TICKETS: userObj.purchasedTickets.map { ticket in
+                    return [
+                        FIELD_TICKET_ID: ticket.id,
+                        FIELD_SESSION_ID: ticket.sessionID,
+                        FIELD_SESSION_NAME: ticket.sessionName,
+                        FIELD_TICKET_DATE: ticket.date,
+                        FIELD_TICKET_QUANTITY: ticket.numberOfTickets
+                    ]
+                }
             ]
             
             if let paymentInfo = userObj.paymentInfo {
@@ -154,21 +169,12 @@ extension FireDBHelper {
             print(#function, "No logged in user")
         }
     }
-
     
 }
 
 // MARK: Favourite sessions extension
 
 extension FireDBHelper {
-    
-//    func fetchUserFavSessions() {
-//        guard let userObj = userObj else {
-//            print(#function, "User object is nil!")
-//            return
-//        }
-//        print(userObj.name)
-//    }
     
     func addSessionIdToFavs(with id: Int) {
         guard var userObj else {
@@ -202,5 +208,21 @@ extension FireDBHelper {
 // MARK: Purchases extension
 
 extension FireDBHelper {
+    
+    func purchaseSessionTicket(with session: Session, and quantity: Int) {
+        guard var userObj else {
+            print(#function, "User objc is nil!")
+            return
+        }        
+        let ticket = Ticket(
+            id: UUID().uuidString,
+            sessionID: session.id,
+            sessionName: session.name,
+            date: session.date,
+            numberOfTickets: quantity
+        )
+        userObj.purchasedTickets.append(ticket)
+        updateUser(with: userObj)
+    }
     
 }

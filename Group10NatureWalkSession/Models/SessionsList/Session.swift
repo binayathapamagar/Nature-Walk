@@ -16,6 +16,7 @@ struct Session: Codable, Identifiable {
     let guideName: String
     let photos: [SessionCoverImage]
     let pricingPerPerson: Double
+    let date: String
     
 }
 

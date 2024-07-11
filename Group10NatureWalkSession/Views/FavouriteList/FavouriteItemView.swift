@@ -46,6 +46,6 @@ struct FavouriteItemView: View {
 
 #Preview {
     FavouriteItemView(
-        session: Session(id: 0, name: "Test", description: "Test", starRating: 3.5, guideName: "Test", photos: [], pricingPerPerson: 3.4)
+        session: Session(id: 0, name: "Test", description: "Test", starRating: 3.5, guideName: "Test", photos: [], pricingPerPerson: 3.4, date: "2024-08-22T11:30:00")
     )
 }

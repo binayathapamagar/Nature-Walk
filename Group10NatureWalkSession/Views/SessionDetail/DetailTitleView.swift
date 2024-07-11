@@ -77,6 +77,8 @@ struct DetailTitleView: View {
             photos: [
                 SessionCoverImage(id: 1, name: "sessionOneA")
             ],
-            pricingPerPerson: 9.99)
+            pricingPerPerson: 9.99,
+            date: "2024-08-22T11:30:00"
+        )
     )
 }
