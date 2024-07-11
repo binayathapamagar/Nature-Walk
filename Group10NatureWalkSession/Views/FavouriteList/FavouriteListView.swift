@@ -10,7 +10,10 @@ import SwiftUI
 struct FavouriteListView: View {
     
     // MARK: Properties
-        
+    
+    @Binding var rootView: RootViewState
+    @Binding var selectedTabIndex: Int
+    
     @EnvironmentObject var fireAuthHelper: FireAuthHelper
     @EnvironmentObject var fireDBHelper: FireDBHelper
     @EnvironmentObject var sessionDataHelper: SessionDataHelper
@@ -32,7 +35,16 @@ struct FavouriteListView: View {
                 } else {
                     List {
                         ForEach(userFavSessions, id: \.id) { session in
-                            FavouriteItemView(session: session)
+                            NavigationLink(destination: SessionDetailView(
+                                session: session,
+                                rootView: $rootView,
+                                selectedTabIndex: $selectedTabIndex
+                            ).environmentObject(fireAuthHelper)
+                             .environmentObject(fireDBHelper)
+                             .environmentObject(sessionDataHelper)
+                            ) {
+                                FavouriteItemView(session: session)
+                            }
                         }
                         .onDelete(perform: deleteItems)
                     }
@@ -111,8 +123,11 @@ extension FavouriteListView {
 }
 
 #Preview {
-    FavouriteListView()
-        .environmentObject(FireAuthHelper.getInstance())
-        .environmentObject(FireDBHelper.getInstance())
-        .environmentObject(SessionDataHelper.getInstance())
+    FavouriteListView(
+        rootView: .constant(.Profile),
+        selectedTabIndex: .constant(0)
+    )
+    .environmentObject(FireAuthHelper.getInstance())
+    .environmentObject(FireDBHelper.getInstance())
+    .environmentObject(SessionDataHelper.getInstance())
 }

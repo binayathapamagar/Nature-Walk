@@ -15,7 +15,7 @@ struct ContentView: View {
     private var firedDBHelper: FireDBHelper = FireDBHelper.getInstance()
     private var fireAuthHelper: FireAuthHelper = FireAuthHelper.getInstance()
     private var sessionDataHelper = SessionDataHelper.getInstance()
-
+    
     @StateObject var locationHelper = LocationHelper.getInstance()
     
     @State private var isLoggedIn: Bool = false
@@ -46,18 +46,21 @@ struct ContentView: View {
                 .tag(0)
                 
                 // Favorites List View
-                FavouriteListView()
-                    .tabItem {
-                        Image(systemName: "heart.fill")
-                        Text("Favourites")
-                    }
-                    .environmentObject(fireAuthHelper)
-                    .environmentObject(firedDBHelper)
-                    .environmentObject(sessionDataHelper)
-                    .onAppear {
-                        checkUserLogin()
-                    }
-                    .tag(1)
+                FavouriteListView(
+                    rootView: $rootView,
+                    selectedTabIndex: $selectedTabIndex
+                )
+                .tabItem {
+                    Image(systemName: "heart.fill")
+                    Text("Favourites")
+                }
+                .environmentObject(fireAuthHelper)
+                .environmentObject(firedDBHelper)
+                .environmentObject(sessionDataHelper)
+                .onAppear {
+                    checkUserLogin()
+                }
+                .tag(1)
                 
                 // Purchases List View
                 PurchaseListView()
