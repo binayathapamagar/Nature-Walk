@@ -19,10 +19,17 @@ struct ProfileView: View {
     @State private var isEditing = false
     @State private var isLoading = false
     @State private var loading = true
+    @State private var showAlert = false
     
     @State private var name = ""
     @State private var email = ""
     @State private var contactNumber = ""
+    
+    @State private var originalName = ""
+    @State private var originalContactNumber = ""
+    @State private var originalCardNumber = ""
+    @State private var originalCVV = ""
+    @State private var originalExpiryDate = Date()
     
     @State private var cardNumber = ""
     @State private var cvv = ""
@@ -107,9 +114,19 @@ struct ProfileView: View {
                             }
                             .disabled(isLoading)
                             .buttonStyle(.borderedProminent)
+                            
+                            Button(action: {
+                                cancelUpdate()
+                            }) {
+                                Text("Cancel")
+                                    .frame(maxWidth: .infinity)
+                                    .foregroundColor(.red)
+                            }
+                            .buttonStyle(.bordered)
                         } else {
                             Button(action: {
                                 isEditing = true
+                                backupOriginalValues()
                             }) {
                                 Text("Edit Profile")
                                     .frame(maxWidth: .infinity)
@@ -143,6 +160,13 @@ struct ProfileView: View {
                     }
                 }
             }
+            .alert(isPresented: $showAlert, content: {
+                Alert(
+                    title: Text("No Changes"),
+                    message: Text("You haven't modified any profile fields."),
+                    dismissButton: .default(Text("OK"))
+                )
+            })
         }
         .onAppear {
             setup()
@@ -151,12 +175,6 @@ struct ProfileView: View {
             handleUserObjChange(with: newUserObj)
         }
     }
-    
-}
-
-// MARK: ProfileView Extension
-
-extension ProfileView {
     
     // MARK: Methods
     
@@ -168,6 +186,11 @@ extension ProfileView {
     }
     
     private func updateUser() {
+        guard hasModifiedProfile() else {
+            showAlert = true
+            return
+        }
+        
         isLoading = true
         
         let expiryDateString = hasModifiedExpiryDate ? Date.dateFormatter.string(from: expiryDate) : expiryDateFromDB
@@ -191,9 +214,9 @@ extension ProfileView {
     
     private func handleUserObjChange(with newUserObj: UserObj?) {
         loading = false
-        if newUserObj != nil {
+        if let newUserObj = newUserObj {
             handleUIUpdate()
-            populateFields(with: newUserObj!)
+            populateFields(with: newUserObj)
         } else {
             // User signed out
             fireDBHelper.removeCollectionListener()
@@ -226,6 +249,35 @@ extension ProfileView {
     private func setupDateForTextField() -> String {
         let expDate = Date.dateFormatter.string(from: expiryDate)
         return expiryDateFromDB.isEmpty ? "For example: " + expDate : expDate
+    }
+    
+    private func hasModifiedProfile() -> Bool {
+        // Compare current values with original values fetched from DB or initial state
+        return name != originalName ||
+        contactNumber != originalContactNumber ||
+        cardNumber != originalCardNumber ||
+        cvv != originalCVV ||
+        hasModifiedExpiryDate
+    }
+    
+    private func backupOriginalValues() {
+        originalName = name
+        originalContactNumber = contactNumber
+        originalCardNumber = cardNumber
+        originalCVV = cvv
+        originalExpiryDate = expiryDate
+    }
+    
+    private func cancelUpdate() {
+        // Restore original values
+        name = originalName
+        contactNumber = originalContactNumber
+        cardNumber = originalCardNumber
+        cvv = originalCVV
+        expiryDate = originalExpiryDate
+        
+        // Exit editing mode
+        isEditing = false
     }
     
     private func logoutButtonTapped() {

@@ -134,8 +134,11 @@ extension ContentView {
     // MARK: Methods
     
     private func setup() {
-        SessionDataHelper().getSessionsData()
         rootView = Auth.auth().currentUser == nil ? .Login : .Profile
+        if Auth.auth().currentUser != nil {
+            firedDBHelper.fetchUserFromDB()
+        }
+        SessionDataHelper().getSessionsData()
     }
     
     private func checkUserLogin() {
