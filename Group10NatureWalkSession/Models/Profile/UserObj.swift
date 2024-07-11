@@ -17,7 +17,7 @@ struct UserObj: Identifiable, Hashable, Codable {
     var email : String = ""
     var contactNumber : String = ""
     var dateAdded: Date = Date()
-    var favorites: [String] = ["1"]
+    var favorites: [Int] = []
     var purchasedTickets: [Ticket] = [Ticket]()
     var paymentInfo: PaymentInfo? = PaymentInfo(cardNumber: "", expiryDate: "", cvv: "")
     

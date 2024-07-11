@@ -22,6 +22,8 @@ class FireDBHelper : ObservableObject {
     private let FIELD_PURCHASED_TICKETS = "purchasedTickets"
     private let FIELD_PAYMENT_INFO = "paymentInfo"
     
+    private let FIELD_FAVOURITES = "favorites"
+    
     private let FIELD_CARD_NUMBER = "cardNumber"
     private let FIELD_CVV = "cvv"
     private let FIELD_EXPIRY_DATE = "expiryDate"
@@ -44,7 +46,7 @@ class FireDBHelper : ObservableObject {
         }
     }
     
-    @Published var userFavSessions = [Session]() {
+    @Published var userFavSessionIds = [Int]() {
         didSet {
             objectWillChange.send()
         }
@@ -70,8 +72,8 @@ class FireDBHelper : ObservableObject {
     func removeCollectionListener() {
         listener?.remove()
         listener = nil
-//        parkingList.removeAll()
         userList.removeAll()
+        userFavSessionIds.removeAll()
     }
     
     private func getUserEmail() -> String? {
@@ -131,10 +133,10 @@ extension FireDBHelper {
                 FIELD_USER_NAME: userObj.name,
                 FIELD_EMAIL: userObj.email,
                 FIELD_CONTACT_NO: userObj.contactNumber,
+                FIELD_FAVORITES: userObj.favorites
             ]
             
             if let paymentInfo = userObj.paymentInfo {
-                
                 // Convert PaymentInfo to a dictionary
                 let paymentInfoDict: [String: Any] = [
                     FIELD_CARD_NUMBER: paymentInfo.cardNumber,
@@ -159,6 +161,7 @@ extension FireDBHelper {
             print(#function, "No logged in user")
         }
     }
+
     
 }
 
@@ -171,15 +174,19 @@ extension FireDBHelper {
             print(#function, "User object is nil!")
             return
         }
-        
+        print(userObj.name)
     }
     
-    func addSessionToFavs() {
-        
+    func addSessionIdToFavs(with id: Int) {
+        guard var userObj else {
+            print(#function, "User objc is nil!")
+            return
+        }
+        userObj.favorites.append(id)
+        updateUser(with: userObj)
     }
     
-    func deleteSessionFromFav() {
-        
+    func deleteSessionFromFav(with id: Int) {
     }
     
 }

@@ -6,13 +6,24 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SessionDetailView: View {
     
     // MARK: Properties
     
     let session: Session
-
+    
+    @Binding var rootView: RootViewState
+    @Binding var selectedTabIndex: Int
+    
+    @EnvironmentObject var fireAuthHelper: FireAuthHelper
+    @EnvironmentObject var fireDBHelper: FireDBHelper
+    @EnvironmentObject var sessionDataHelper: SessionDataHelper
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var showLoginActionSheet = false
+        
     // MARK: Body
     
     var body: some View {
@@ -35,15 +46,15 @@ struct SessionDetailView: View {
                 HStack {
                     // Favorites Button
                     Button(action: {
-                        
+                        favButtonTapped()
                     }) {
                         HStack {
                             Image(
                                 systemName: "heart"
                             )
-                                .foregroundColor(
-                                    .gray
-                                )
+                            .foregroundColor(
+                                .gray
+                            )
                             Text("Favorite")
                                 .font(.subheadline)
                                 .foregroundColor(
@@ -79,12 +90,43 @@ struct SessionDetailView: View {
             }
             .navigationTitle("Learn about the \(session.name)")
             .navigationBarTitleDisplayMode(.inline)
+            .actionSheet(isPresented: $showLoginActionSheet) {
+                ActionSheet(
+                    title: Text("Login Required"),
+                    message: Text("Please login to access this feature."),
+                    buttons: [
+                        .default(Text("Login")) {
+                            openLoginPage()
+                        },
+                        .cancel()
+                    ]
+                )
+            }
         }
         .scrollIndicators(.hidden)
-        .onAppear {
-            
+    }
+}
+
+// MARK: SessionDetailView extension
+
+extension SessionDetailView {
+    
+    // MARK: Methods
+    
+    private func favButtonTapped() {
+        if Auth.auth().currentUser != nil {
+            fireDBHelper.addSessionIdToFavs(with: session.id)
+        } else {
+            showLoginActionSheet = true
         }
     }
+    
+    private func openLoginPage() {
+        rootView = .Login
+        selectedTabIndex = 3
+        dismiss()
+    }
+    
 }
 
 #Preview {
@@ -98,6 +140,12 @@ struct SessionDetailView: View {
             photos: [
                 SessionCoverImage(id: 1, name: "sessionOneA")
             ],
-            pricingPerPerson: 9.99)
+            pricingPerPerson: 9.99
+        ),
+        rootView: .constant(.Login),
+        selectedTabIndex: .constant(0)
     )
+    .environmentObject(FireAuthHelper.getInstance())
+    .environmentObject(FireDBHelper.getInstance())
+    .environmentObject(SessionDataHelper.getInstance())
 }

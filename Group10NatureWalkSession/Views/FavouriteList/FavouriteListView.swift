@@ -31,6 +31,7 @@ struct FavouriteListView: View {
             .navigationTitle("Favs")
             
         }//: NAVIGATIONVIEW
+        
     }
     
 }

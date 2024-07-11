@@ -32,15 +32,18 @@ struct ContentView: View {
             TabView(selection: $selectedTabIndex) {
                 
                 // Session List View
-                SessionListView()
-                    .tabItem {
-                        Image(systemName: "square.grid.2x2")
-                        Text("Sessions")
-                    }
-                    .environmentObject(fireAuthHelper)
-                    .environmentObject(firedDBHelper)
-                    .environmentObject(sessionDataHelper)
-                    .tag(0)
+                SessionListView(
+                    rootView: $rootView,
+                    selectedTabIndex: $selectedTabIndex
+                )
+                .tabItem {
+                    Image(systemName: "square.grid.2x2")
+                    Text("Sessions")
+                }
+                .environmentObject(fireAuthHelper)
+                .environmentObject(firedDBHelper)
+                .environmentObject(sessionDataHelper)
+                .tag(0)
                 
                 // Favorites List View
                 FavouriteListView()

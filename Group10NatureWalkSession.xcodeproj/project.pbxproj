@@ -11,6 +11,7 @@
 		2A3AFB692C402F640036B036 /* AuthHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB682C402F640036B036 /* AuthHeadingView.swift */; };
 		2A3AFB6C2C4030B70036B036 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */; };
 		2A3AFB6E2C4040C70036B036 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB6D2C4040C70036B036 /* DateExtension.swift */; };
+		2A3AFB722C4059AE0036B036 /* FavouriteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB712C4059AE0036B036 /* FavouriteItemView.swift */; };
 		2A93D61A2C36083600D92221 /* sessionsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A93D6192C36083600D92221 /* sessionsList.json */; };
 		2A93D61C2C360AFE00D92221 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93D61B2C360AFE00D92221 /* BundleExtension.swift */; };
 		2A95CC4B2C267AB30044617B /* Group10NatureWalkSessionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A95CC4A2C267AB30044617B /* Group10NatureWalkSessionApp.swift */; };
@@ -63,6 +64,7 @@
 		2A3AFB682C402F640036B036 /* AuthHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeadingView.swift; sourceTree = "<group>"; };
 		2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
 		2A3AFB6D2C4040C70036B036 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		2A3AFB712C4059AE0036B036 /* FavouriteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteItemView.swift; sourceTree = "<group>"; };
 		2A93D6192C36083600D92221 /* sessionsList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sessionsList.json; sourceTree = "<group>"; };
 		2A93D61B2C360AFE00D92221 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		2A95CC472C267AB30044617B /* Group10NatureWalkSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Group10NatureWalkSession.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				2A95CC7F2C2684A30044617B /* FavouriteListView.swift */,
+				2A3AFB712C4059AE0036B036 /* FavouriteItemView.swift */,
 			);
 			path = FavouriteList;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				2AF380F92C27CBE300800202 /* SessionDataHelper.swift in Sources */,
 				2AF381152C27DEE600800202 /* DetailPricingView.swift in Sources */,
 				2AF381012C27D65300800202 /* CoverImage.swift in Sources */,
+				2A3AFB722C4059AE0036B036 /* FavouriteItemView.swift in Sources */,
 				2A97FFA32C3F237400D96A41 /* Ticket.swift in Sources */,
 				2AF380FE2C27D4AD00800202 /* SessionListItemView.swift in Sources */,
 				2AF380FB2C27CE3200800202 /* ApiResponse.swift in Sources */,
