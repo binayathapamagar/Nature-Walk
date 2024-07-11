@@ -12,6 +12,13 @@
 //  Created by BINAYA THAPA MAGAR on 2024-06-22.
 //
 
+//
+//  UserView.swift
+//  Group10NatureWalkSession
+//
+//  Created by BINAYA THAPA MAGAR on 2024-06-22.
+//
+
 import SwiftUI
 
 struct ProfileView: View {
@@ -31,13 +38,19 @@ struct ProfileView: View {
     @State private var email = ""
     @State private var contactNumber = ""
     
+    @State private var cardNumber = ""
+    @State private var cvv = ""
+    @State private var expiryDate = ""
+    
     // MARK: Body
     
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
+                    
                     Form {
+                        
                         Section(
                             header: Text("User Information").font(.headline).padding(.bottom, 8)
                         ) {
@@ -52,7 +65,25 @@ struct ProfileView: View {
                                 .disabled(!isEditing)
                                 .keyboardType(.phonePad)
                         }
-                    }
+                        
+                        Section(
+                            header: Text("Payment Information (Optional)").font(.headline).padding(.bottom, 8)
+                        ) {
+                            TextField("Card Number", text: $cardNumber)
+                                .padding(.vertical, 8)
+                                .disabled(!isEditing)
+                                .keyboardType(.numberPad)
+                            TextField("CVV", text: $cvv)
+                                .padding(.vertical, 8)
+                                .disabled(!isEditing)
+                                .keyboardType(.numberPad)
+                            TextField("Expiry Date", text: $expiryDate)
+                                .padding(.vertical, 8)
+                                .disabled(!isEditing)
+                                .keyboardType(.numbersAndPunctuation)
+                        }
+                        
+                    }//: FORM
                     
                     HStack {
                         if isEditing {
@@ -87,7 +118,7 @@ struct ProfileView: View {
                                 .foregroundColor(.red)
                         }
                         .buttonStyle(.bordered)
-                    }
+                    }//: HSTACK
                     .padding()
                 }
                 .navigationTitle("Profile")
@@ -130,6 +161,7 @@ struct ProfileView: View {
                 name: name,
                 email: email,
                 contactNumber: contactNumber
+                // Add other fields as needed
             )
         )
         isLoading = false
@@ -138,15 +170,29 @@ struct ProfileView: View {
     private func handleUserObjChange(with newUserObj: UserObj?) {
         loading = false
         if newUserObj != nil {
-            isEditing = false
-            isLoading = false
-            loading = false
-            name = newUserObj?.name ?? "No name"
-            email = newUserObj?.email ?? "No email"
-            contactNumber = newUserObj?.contactNumber ?? "No contact number"
+            handleUIUpdate()
+            populateFields(with: newUserObj!)
         } else {
             // User signed out
             fireDBHelper.removeCollectionListener()
+        }
+    }
+    
+    private func handleUIUpdate() {
+        isEditing = false
+        isLoading = false
+        loading = false
+    }
+    
+    private func populateFields(with userObj: UserObj) {
+        name = userObj.name
+        email = userObj.email
+        contactNumber = userObj.contactNumber
+        
+        if let paymentInfo = userObj.paymentInfo {
+            cardNumber = paymentInfo.cardNumber
+            cvv = paymentInfo.cvv
+            expiryDate = paymentInfo.expiryDate
         }
     }
     
