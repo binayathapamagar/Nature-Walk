@@ -11,7 +11,7 @@ struct SessionListView: View {
     
     // MARK: Properties
     
-    @ObservedObject private var sessionApiHelper = SessionDataHelper()
+    @StateObject private var sessionApiHelper = SessionDataHelper()
     
     // MARK: Body
     
@@ -21,7 +21,7 @@ struct SessionListView: View {
                 SessionListCoverImage(coverImages: sessionApiHelper.homeCoverImages)
                     .listRowSeparator(.hidden)
 
-                Text("Hikes Near You")
+                Text("Sessions Near You")
                     .font(.title2)
                     .fontWeight(.heavy)
 
@@ -40,7 +40,10 @@ struct SessionListView: View {
             )
             .scrollIndicators(.hidden)
             .onAppear {
-                sessionApiHelper.getSessionsData()
+                print(#function, "LOG: SessionListView OnAppear")
+                if sessionApiHelper.sessionList.isEmpty || sessionApiHelper.homeCoverImages.isEmpty {
+                    sessionApiHelper.getSessionsData()
+                }
             }
             .navigationTitle("Toronto Nature Walk")
             .tint(.black)

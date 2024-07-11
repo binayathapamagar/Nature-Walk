@@ -152,7 +152,7 @@ extension LoginView {
             fireDBHelper.removeCollectionListener()
             fireDBHelper.getUserFromDB()
             //navigate to home screen
-            rootView = .TabView
+            rootView = .Profile
         }
     }
     
@@ -160,7 +160,7 @@ extension LoginView {
         fireDBHelper.removeCollectionListener()
         //                    fireDBHelper.getAllParkingHistory()
         //navigate to home screen
-        rootView = .TabView
+        rootView = .Profile
     }
     
 }

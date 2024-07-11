@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SessionListCoverImage: View {
     
@@ -13,7 +14,7 @@ struct SessionListCoverImage: View {
     
     let coverImages: [CoverImage]
     @State private var currentIndex = 0
-    let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    @State private var timer: AnyCancellable?
     
     // MARK: Body
     
@@ -34,20 +35,30 @@ struct SessionListCoverImage: View {
             EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         )
         .padding(.bottom, 16)
-        .onReceive(timer) { _ in
-            withAnimation {
-                currentIndex = (currentIndex + 1) % coverImages.count
-            }
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            stopTimer()
         }
     }
-}
-
-#Preview {
-    SessionListCoverImage(
-        coverImages: [
-            CoverImage(id: 1, name: "coverImage1")
-        ]
-    )
+    
+    // MARK: Methods
+    
+    private func startTimer() {
+        timer = Timer.publish(every: 3, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                withAnimation {
+                    currentIndex = (currentIndex + 1) % coverImages.count
+                }
+            }
+    }
+    
+    private func stopTimer() {
+        timer?.cancel()
+        timer = nil
+    }
 }
 
 extension SessionListCoverImage {
@@ -56,4 +67,13 @@ extension SessionListCoverImage {
         (UIScreen.main.bounds.size.width) / 1.575
     }
     
+}
+
+#Preview {
+    SessionListCoverImage(
+        coverImages: [
+            CoverImage(id: 1, name: "coverImage1"),
+            CoverImage(id: 2, name: "coverImage2"),
+        ]
+    )
 }

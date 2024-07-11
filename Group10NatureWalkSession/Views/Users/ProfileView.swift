@@ -236,7 +236,7 @@ extension ProfileView {
 }
 
 #Preview {
-    ProfileView(rootView: .constant(.TabView))
+    ProfileView(rootView: .constant(.Profile))
         .environmentObject(FireAuthHelper.getInstance())
         .environmentObject(FireDBHelper.getInstance())
 }

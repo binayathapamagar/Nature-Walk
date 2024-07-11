@@ -10,7 +10,7 @@ import Foundation
 enum RootViewState {
     
     case Login
-    case TabView
+    case Profile
     case Register
     
 }

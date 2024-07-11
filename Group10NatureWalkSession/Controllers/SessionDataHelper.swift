@@ -21,8 +21,8 @@ class SessionDataHelper: ObservableObject {
         let response: ApiResponse = Bundle.main.decode("sessionsList.json")
         homeCoverImages = response.coverImages
         sessionList = response.sessions
-        print(#function, "Got the home cover images: \(homeCoverImages)")
-        print(#function, "Got the sessions data: \(sessionList)")
+        print(#function, "Got the home cover images: \(homeCoverImages.count)")
+        print(#function, "Got the sessions data: \(sessionList.count)")
     }
     
 }

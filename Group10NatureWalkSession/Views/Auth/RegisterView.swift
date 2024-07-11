@@ -133,7 +133,7 @@ extension RegisterView {
     private func userRegistered() {
         // TODO: Fetch related stuffs
         // Navigate to home screen
-        rootView = .TabView
+        rootView = .Profile
         dismiss()
     }
     
