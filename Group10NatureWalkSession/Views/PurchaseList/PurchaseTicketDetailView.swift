@@ -102,7 +102,7 @@ struct PurchaseTicketDetailView: View {
                     HStack(spacing: 8) {
                         Text("Guide Phone:")
                             .font(.headline)
-                        Text(session.guidePhoneNum)
+                        Text("+1 \(session.guidePhoneNum)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }

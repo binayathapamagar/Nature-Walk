@@ -16,12 +16,22 @@ struct DetailGuideView: View {
     // MARK: Body
     
     var body: some View {
-        HStack {
-            Text("Guide:")
-                .font(.headline)
-                .fontWeight(.bold)
-            Text(session.guideName)
-                .font(.subheadline)
+        VStack(spacing: 4) {
+            HStack {
+                Text("Guide name:")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                Text(session.guideName)
+                    .font(.subheadline)
+            }
+            
+            HStack {
+                Text("Guide phone number:")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                Text(session.guidePhoneNum)
+                    .font(.subheadline)
+            }
         }
     }
 }
