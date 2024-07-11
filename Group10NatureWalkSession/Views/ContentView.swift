@@ -21,6 +21,7 @@ struct ContentView: View {
     // MARK: Body
     
     var body: some View {
+        
         NavigationStack {
             
             switch rootView {
@@ -41,18 +42,24 @@ struct ContentView: View {
                             Image(systemName: "square.grid.2x2")
                             Text("Sessions")
                         }
+                        .environmentObject(fireAuthHelper)
+                        .environmentObject(firedDBHelper)
                     
                     FavouriteListView()
                         .tabItem {
                             Image(systemName: "heart.fill")
                             Text("Favourites")
                         }
+                        .environmentObject(fireAuthHelper)
+                        .environmentObject(firedDBHelper)
                     
                     PurchaseListView()
                         .tabItem {
                             Image(systemName: "dollarsign.circle.fill")
                             Text("Purchases")
                         }
+                        .environmentObject(fireAuthHelper)
+                        .environmentObject(firedDBHelper)
                     
                     ProfileView(rootView: $rootView)
                         .tabItem {

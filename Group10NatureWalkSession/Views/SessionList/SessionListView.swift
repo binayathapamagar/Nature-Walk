@@ -16,13 +16,13 @@ struct SessionListView: View {
     // MARK: Body
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 SessionListCoverImage(coverImages: sessionApiHelper.homeCoverImages)
                     .listRowSeparator(.hidden)
 
                 Text("Hikes Near You")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.heavy)
 
                 ForEach(sessionApiHelper.sessionList) { session in
@@ -42,7 +42,7 @@ struct SessionListView: View {
             .onAppear {
                 sessionApiHelper.getSessionsData()
             }
-            .navigationTitle("TFN Sessions")
+            .navigationTitle("Toronto Nature Walk")
             .tint(.black)
         }//: NavigationStack
     }//: Body
