@@ -84,23 +84,42 @@ struct ProfileView: View {
             .navigationTitle("Profile")
         }
         .onAppear {
-            fireDBHelper.getUserFromDB()
+            setup()
         }
-//        .onChange(of: fireDBHelper.userObj) { oldValue, newValue in
-//            if newValue != nil {
-//                name = newValue?.name ?? "No name"
-//                email = newValue?.email ?? "No email"
-//                contactNumber = newValue?.contactNumber ?? "No contact number"
-//            }
-//        }
+        .onChange(of: fireDBHelper.userObj) { oldUserObj, newUserObj in
+            handleUserObjChange(with: newUserObj)
+        }
     }
     
     // MARK: Methods
     
+    private func setup() {
+        fireDBHelper.getUserFromDB()
+    }
+    
     private func updateUser() {
-//        isLoading = true
-//        fireDBHelper.updateUser(with: UserObj(name: name, contactNumber: contactNumber, email: email, carPlateNumber: carPlateNumber))
-//        isLoading = false
+        isLoading = true
+        fireDBHelper.updateUser(
+            with: UserObj(
+                name: name,
+                email: email,
+                contactNumber: contactNumber
+            )
+        )
+        isLoading = false
+    }
+    
+    private func handleUserObjChange(with newUserObjc: UserObj?) {
+        if newUserObjc != nil {
+            isEditing = false
+            isLoading = false
+            name = newUserObjc?.name ?? "No name"
+            email = newUserObjc?.email ?? "No email"
+            contactNumber = newUserObjc?.contactNumber ?? "No contact number"
+        } else {
+            //User signed out
+            fireDBHelper.removeCollectionListener()
+        }
     }
     
 }

@@ -95,6 +95,7 @@ class FireAuthHelper: ObservableObject {
         do {
             try Auth.auth().signOut()
             print(#function, "Successfully signed the user out.")
+            self.user = nil
             UserDefaults.standard.removeObject(forKey: FireAuthHelper.emailKey)
         } catch let e {
             print(#function, "Error logging the user out: \(e)")

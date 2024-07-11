@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2A1D0A902C3F1A1400D3DB24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A1D0A8F2C3F1A1400D3DB24 /* GoogleService-Info.plist */; };
+		2A3AFB692C402F640036B036 /* AuthHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB682C402F640036B036 /* AuthHeadingView.swift */; };
+		2A3AFB6C2C4030B70036B036 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */; };
 		2A93D61A2C36083600D92221 /* sessionsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A93D6192C36083600D92221 /* sessionsList.json */; };
 		2A93D61C2C360AFE00D92221 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93D61B2C360AFE00D92221 /* BundleExtension.swift */; };
 		2A95CC4B2C267AB30044617B /* Group10NatureWalkSessionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A95CC4A2C267AB30044617B /* Group10NatureWalkSessionApp.swift */; };
@@ -57,6 +59,8 @@
 
 /* Begin PBXFileReference section */
 		2A1D0A8F2C3F1A1400D3DB24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2A3AFB682C402F640036B036 /* AuthHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeadingView.swift; sourceTree = "<group>"; };
+		2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
 		2A93D6192C36083600D92221 /* sessionsList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sessionsList.json; sourceTree = "<group>"; };
 		2A93D61B2C360AFE00D92221 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		2A95CC472C267AB30044617B /* Group10NatureWalkSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Group10NatureWalkSession.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +130,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		2A3AFB6A2C4030A70036B036 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		2A93D6182C36082C00D92221 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +169,7 @@
 				2A93D6182C36082C00D92221 /* Data */,
 				2AF381042C27D7DC00800202 /* Extensions */,
 				2A1D0A8F2C3F1A1400D3DB24 /* GoogleService-Info.plist */,
-				2A95CC5A2C267B790044617B /* Helpers */,
+				2A95CC5A2C267B790044617B /* Controllers */,
 				2A95CC642C267C7D0044617B /* Models */,
 				2A95CC502C267AB40044617B /* Preview Content */,
 				2A1D0A8C2C3F18E600D3DB24 /* Resources */,
@@ -197,7 +209,7 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		2A95CC5A2C267B790044617B /* Helpers */ = {
+		2A95CC5A2C267B790044617B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				2A95CC782C2681200044617B /* FirebaseAuthHelper.swift */,
@@ -205,7 +217,7 @@
 				2A97FF952C3F1D1A00D96A41 /* LocationHelper.swift */,
 				2AF380F82C27CBE300800202 /* SessionDataHelper.swift */,
 			);
-			path = Helpers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		2A95CC642C267C7D0044617B /* Models */ = {
@@ -273,9 +285,11 @@
 			isa = PBXGroup;
 			children = (
 				2A97FFA62C3F27C400D96A41 /* AuthButton.swift */,
+				2A3AFB682C402F640036B036 /* AuthHeadingView.swift */,
 				2A97FF9E2C3F1ED200D96A41 /* CustomTextField.swift */,
 				2A95CC7B2C2684580044617B /* LoginView.swift */,
 				2A97FF9C2C3F1E0400D96A41 /* RegisterView.swift */,
+				2A3AFB6A2C4030A70036B036 /* Styles */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -423,6 +437,7 @@
 				2A97FF9D2C3F1E0400D96A41 /* RegisterView.swift in Sources */,
 				2A95CC892C2685C90044617B /* VenueMapView.swift in Sources */,
 				2AF381032C27D77000800202 /* SessionListCoverImage.swift in Sources */,
+				2A3AFB692C402F640036B036 /* AuthHeadingView.swift in Sources */,
 				2A93D61C2C360AFE00D92221 /* BundleExtension.swift in Sources */,
 				2AF381082C27D7F700800202 /* UIWindowExtension.swift in Sources */,
 				2A95CC822C2684D20044617B /* PurchaseListView.swift in Sources */,
@@ -452,6 +467,7 @@
 				2A95CC772C267FF30044617B /* FireDBHelper.swift in Sources */,
 				2A95CC802C2684A30044617B /* FavouriteListView.swift in Sources */,
 				2A95CC7E2C2684850044617B /* ProfileView.swift in Sources */,
+				2A3AFB6C2C4030B70036B036 /* CheckboxStyle.swift in Sources */,
 				2A97FFA72C3F27C400D96A41 /* AuthButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

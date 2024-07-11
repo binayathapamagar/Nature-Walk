@@ -27,53 +27,53 @@ struct RegisterView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                Text("Sign Up")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                
-                Form {
-                    CustomTextField(placeholder: "Name", text: $name)
-                    CustomTextField(placeholder: "Email", text: $email)
-                        .autocapitalization(.none)
-                    CustomSecureField(placeholder: "Password", text: $password)
-                    CustomSecureField(placeholder: "Confirm Password", text: $confirmPassword)
-                    CustomTextField(placeholder: "Contact Number", text: $contactNumber)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    
+                    AuthHeadingView(title: "Sign Up", description: "Join us and others from Toronto to rejuvenate by walking")
+                    
+                    Form {
+                        CustomTextField(placeholder: "Name", text: $name)
+                            .padding(.vertical, 12)
+                        CustomTextField(placeholder: "Email", text: $email)
+                            .padding(.vertical, 12)
+                            .autocapitalization(.none)
+                        CustomSecureField(placeholder: "Password", text: $password)
+                            .padding(.vertical, 12)
+                        CustomSecureField(placeholder: "Confirm Password", text: $confirmPassword)
+                            .padding(.vertical, 12)
+                        CustomTextField(placeholder: "Contact Number", text: $contactNumber)
+                            .padding(.vertical, 12)
+                    }
+                    .formStyle(ColumnsFormStyle())
+                    
+                    Button(action: {
+                        registerButtonTapped()
+                    }) {
+                        AuthButton(title: "Sign Up", color: .blue)
+                    }
+                    .padding(.top, 20)
+                    
+                    Spacer()
+                } // VStack
+                .padding()
+                .background(Color(.systemBackground))
+                .onChange(of: fireAuthHelper.user) { oldUser, newUser in
+                    if newUser != nil {
+                        registerNewUser()
+                    }
                 }
-                .shadow(color: .gray.opacity(0.6), radius: 5, x: 0, y: 3)
-                
-                Button(action: {
-                    registerButtonTapped()
-                }) {
-                    AuthButton(title: "Register", color: .blue)
+                .onChange(of: fireDBHelper.userList) { oldValue, newValue in
+                    if newValue.count != oldValue.count {
+                        userRegistered()
+                    }
                 }
-                .padding(.top, 20)
-                
-                Spacer()
-            } // VStack
-            .padding()
-            .background(Color(.systemBackground))
-            .onChange(of: fireAuthHelper.user) { oldUser, newUser in
-                if newUser != nil {
-                    registerNewUser()
-                }
-            }
-            .onChange(of: fireDBHelper.userList) { oldValue, newValue in
-                if newValue.count != oldValue.count {
-                    userRegistered()
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.inline)
+            } // ScrollView
         }//: NAVIGATION STACK
         .tint(.black)
     } // BODY
-    
-}
 
-#Preview {
-    RegisterView(rootView: .constant(.Register))
-        .environmentObject(FireAuthHelper.getInstance())
-        .environmentObject(FireDBHelper.getInstance())
 }
 
 // MARK: RegisterView extension
@@ -137,4 +137,10 @@ extension RegisterView {
         dismiss()
     }
     
+}
+
+#Preview {
+    RegisterView(rootView: .constant(.Register))
+        .environmentObject(FireAuthHelper.getInstance())
+        .environmentObject(FireDBHelper.getInstance())
 }

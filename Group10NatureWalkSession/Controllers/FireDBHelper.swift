@@ -40,7 +40,6 @@ class FireDBHelper : ObservableObject {
         }
     }
     
-    
     // MARK: Initializers
     
     init(db: Firestore) {
@@ -56,8 +55,7 @@ class FireDBHelper : ObservableObject {
         return shared!
     }
     
-    
-    // MARK: User Methods
+    // MARK: User DB Methods
     
     func insertUser(newUser: UserObj) {
         if let userEmail = getUserEmail(), !userEmail.isEmpty {
@@ -77,19 +75,22 @@ class FireDBHelper : ObservableObject {
     
     func getUserFromDB() {
         if let userEmail = getUserEmail(), !userEmail.isEmpty {
-            db.collection(COLLECTION_NAME).getDocuments { (querySnapshot, error) in
-                if let error = error {
-                    print("Error getting documents: \(error)")
-                } else {
-                    querySnapshot?.documents.forEach({ document in
-                        do {
-                            var userObj = try document.data(as: UserObj.self)
-                            userObj.id = document.documentID
-                            self.userObj = userObj
-                        } catch let e {
-                            print(#function, "No document available: \(e)")
+            self.db.collection(COLLECTION_NAME).document(userEmail).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    do {
+                        var userObj = try document.data(as: UserObj.self)
+                        userObj.id = document.documentID
+                        self.userObj = userObj
+                        if let index = self.userList.firstIndex(where: { $0.id == userObj.id }) {
+                            self.userList[index] = userObj
+                        } else {
+                            self.userList.append(userObj)
                         }
-                    })
+                    } catch let e {
+                        print(#function, "Error decoding user document: \(e)")
+                    }
+                } else {
+                    print(#function, "Document does not exist: \(String(describing: error))")
                 }
             }
         } else {
@@ -105,16 +106,14 @@ class FireDBHelper : ObservableObject {
                 .updateData([
                     FIELD_USER_NAME: userObj.name,
                     FIELD_EMAIL: userObj.email,
-                    FIELD_CONTACT_NO: userObj.contactNumber,
-                    FIELD_FAVORITES: userObj.favorites,
-                    FIELD_PURCHASED_TICKETS: userObj.purchasedTickets,
-                    FIELD_PAYMENT_INFO: userObj.paymentInfo!
+                    FIELD_CONTACT_NO: userObj.contactNumber
                 ]) { error in
                     
                     if let error {
                         print(#function, "Failed to update document: \(userEmail) | \(userObj.name) | \(error)")
                     } else {
                         print(#function, "Successfully updated document: \(userEmail) | \(userObj.name)")
+                        self.getUserFromDB()
                     }
                     
                 }
@@ -123,10 +122,13 @@ class FireDBHelper : ObservableObject {
         }
     }
     
+    // MARK: Other methods
+    
     func removeCollectionListener() {
         listener?.remove()
         listener = nil
-//        bookList.removeAll()
+//        parkingList.removeAll()
+        userList.removeAll()
     }
     
     private func getUserEmail() -> String? {
