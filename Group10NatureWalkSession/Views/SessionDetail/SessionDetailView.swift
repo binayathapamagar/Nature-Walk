@@ -146,11 +146,6 @@ extension SessionDetailView {
     
     private func updateFavButton(with newUserObj: UserObj?) {
         isLoading = false
-        guard let newUserObj = newUserObj else {
-            print(#function, "New user obj is nil")
-            return
-        }
-        
         if sessionInUserFavs() {
             isSessionInFavorites = true
         } else {

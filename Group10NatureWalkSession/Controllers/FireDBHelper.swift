@@ -45,12 +45,12 @@ class FireDBHelper : ObservableObject {
             objectWillChange.send()
         }
     }
-    
-    @Published var userFavSessionIds = [Int]() {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+//    
+//    @Published var userFavSessionIds = [Int]() {
+//        didSet {
+//            objectWillChange.send()
+//        }
+//    }
     
     // MARK: Initializers
     
@@ -73,7 +73,7 @@ class FireDBHelper : ObservableObject {
         listener?.remove()
         listener = nil
         userList.removeAll()
-        userFavSessionIds.removeAll()
+//        userFavSessionIds.removeAll()
     }
     
     private func getUserEmail() -> String? {
@@ -169,13 +169,13 @@ extension FireDBHelper {
 
 extension FireDBHelper {
     
-    func fetchUserFavSessions() {
-        guard let userObj = userObj else {
-            print(#function, "User object is nil!")
-            return
-        }
-        print(userObj.name)
-    }
+//    func fetchUserFavSessions() {
+//        guard let userObj = userObj else {
+//            print(#function, "User object is nil!")
+//            return
+//        }
+//        print(userObj.name)
+//    }
     
     func addSessionIdToFavs(with id: Int) {
         guard var userObj else {
@@ -192,6 +192,15 @@ extension FireDBHelper {
             return
         }
         userObj.favorites.removeAll(where: { $0 == id })
+        updateUser(with: userObj)
+    }
+    
+    func removeAllSessionsFromFav() {
+        guard var userObj else {
+            print(#function, "User objc is nil!")
+            return
+        }
+        userObj.favorites.removeAll()
         updateUser(with: userObj)
     }
     
