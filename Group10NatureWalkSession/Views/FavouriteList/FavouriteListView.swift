@@ -116,6 +116,7 @@ extension FavouriteListView {
     
     private func filterUserFavsFromSessList() {
         guard let userObj = fireDBHelper.userObj else {
+            userFavSessions.removeAll()
             print(#function, "FavouriteListView: Userobj is nil!")
             return
         }

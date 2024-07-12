@@ -54,6 +54,11 @@ struct PurchaseListView: View {
             .onAppear {
                 setup()
             }
+            .onChange(of: fireDBHelper.userObj, { oldValue, newValue in
+                if fireAuthHelper.user == nil {
+                    userPurchasedTickets.removeAll()
+                }
+            })
         }
     }
 

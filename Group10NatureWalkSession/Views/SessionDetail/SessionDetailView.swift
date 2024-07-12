@@ -277,6 +277,7 @@ extension SessionDetailView {
             ? fireDBHelper.deleteSessionFromFav(with: session.id)
             : fireDBHelper.addSessionIdToFavs(with: session.id)
         } else {
+            isLoading = false
             showLoginActionSheet = true
         }
     }
