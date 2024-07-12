@@ -59,9 +59,12 @@ struct FavouriteListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        showAlert = true
+                        if !userFavSessions.isEmpty {
+                            showAlert = true
+                        }
                     }) {
                         Text("Remove All")
+                            .foregroundStyle(.black)
                     }
                 }
             }
