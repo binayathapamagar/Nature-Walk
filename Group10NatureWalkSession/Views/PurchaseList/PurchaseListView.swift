@@ -24,7 +24,7 @@ struct PurchaseListView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            Group {
                 if userPurchasedTickets.isEmpty {
                     Text("You've yet to make any ticket purchases...")
                         .foregroundColor(.gray)
@@ -32,24 +32,25 @@ struct PurchaseListView: View {
                         .multilineTextAlignment(.center)
                         .padding()
                 } else {
-                    VStack(alignment: .leading, spacing: 16) {
-                        ForEach(userPurchasedTickets) { ticket in
-                            NavigationLink(
-                                destination: PurchaseTicketDetailView(ticket: ticket)
-                                    .environmentObject(fireAuthHelper)
-                                    .environmentObject(fireDBHelper)
-                                    .environmentObject(sessionDataHelper)
-                            ) {
-                                PurchaseItemView(ticket: ticket)
-                                    .padding(.vertical, 8)
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(userPurchasedTickets, id: \.id) { ticket in
+                                NavigationLink(
+                                    destination: PurchaseTicketDetailView(ticket: ticket)
+                                        .environmentObject(fireAuthHelper)
+                                        .environmentObject(fireDBHelper)
+                                        .environmentObject(sessionDataHelper)
+                                ) {
+                                    PurchaseItemView(ticket: ticket)
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 16)
+                                }
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }
-                        .padding(.horizontal)
                     }
-                    .padding(.top)
                 }
             }
+            .groupBoxStyle(DefaultGroupBoxStyle())
             .navigationTitle("Purchases")
             .onAppear {
                 setup()
