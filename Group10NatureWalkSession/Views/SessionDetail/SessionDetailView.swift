@@ -222,6 +222,7 @@ extension SessionDetailView {
             geocodeAddress()
         } else {
             print(#function, "User is not logged in")
+            geocodeAddress()
         }
     }
     

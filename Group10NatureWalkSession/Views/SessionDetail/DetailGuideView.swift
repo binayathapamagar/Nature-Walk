@@ -29,8 +29,17 @@ struct DetailGuideView: View {
                 Text("Guide phone number:")
                     .font(.headline)
                     .fontWeight(.bold)
-                Text(session.guidePhoneNum)
-                    .font(.subheadline)
+                Button(action: {
+                    let telephone = "tel://"
+                    let formattedString = telephone + session.guidePhoneNum
+                    guard let url = URL(string: formattedString) else { return }
+                    
+                    //You may need to import UIKit framework to use UIApplication package
+                    UIApplication.shared.open(url)
+                }) {
+                    Text(session.guidePhoneNum)
+                        .font(.subheadline)
+                }
             }
         }
     }
