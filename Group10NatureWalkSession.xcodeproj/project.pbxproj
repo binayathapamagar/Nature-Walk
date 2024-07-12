@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A0B9ED72C40F5E7002CE637 /* FireStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B9ED62C40F5E7002CE637 /* FireStorage.swift */; };
 		2A1D0A902C3F1A1400D3DB24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A1D0A8F2C3F1A1400D3DB24 /* GoogleService-Info.plist */; };
 		2A3AFB692C402F640036B036 /* AuthHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB682C402F640036B036 /* AuthHeadingView.swift */; };
 		2A3AFB6C2C4030B70036B036 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A0B9ED62C40F5E7002CE637 /* FireStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorage.swift; sourceTree = "<group>"; };
 		2A1D0A8F2C3F1A1400D3DB24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A3AFB682C402F640036B036 /* AuthHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeadingView.swift; sourceTree = "<group>"; };
 		2A3AFB6B2C4030B70036B036 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			children = (
 				2A95CC782C2681200044617B /* FirebaseAuthHelper.swift */,
 				2A95CC762C267FF30044617B /* FireDBHelper.swift */,
+				2A0B9ED62C40F5E7002CE637 /* FireStorage.swift */,
 				2A97FF952C3F1D1A00D96A41 /* LocationHelper.swift */,
 				2AF380F82C27CBE300800202 /* SessionDataHelper.swift */,
 			);
@@ -493,6 +496,7 @@
 				2A95CC7E2C2684850044617B /* ProfileView.swift in Sources */,
 				2A3AFB6C2C4030B70036B036 /* CheckboxStyle.swift in Sources */,
 				2A97FFA72C3F27C400D96A41 /* AuthButton.swift in Sources */,
+				2A0B9ED72C40F5E7002CE637 /* FireStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
